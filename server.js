@@ -7,7 +7,15 @@ const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    process.env.FRONTEND_URL,
+    "https://summit-web-frontend.onrender.com",
+    "http://localhost:3000",
+    "http://localhost:5500",
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
